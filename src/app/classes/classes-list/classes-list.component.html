@@ -15,7 +15,7 @@
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<mat-paginator [length] = "totalClasses" [pageSize]="classesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)">
+<mat-paginator [length] = "totalClasses" [pageSize]="classesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="classes.length > 0">
 
 </mat-paginator>
 <p class="info-text mat-body-1" *ngIf="classes.length <= 0 && !isLoading">No posts added yet</p>

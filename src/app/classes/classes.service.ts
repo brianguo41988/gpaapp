@@ -8,7 +8,7 @@ import { Router } from "@angular/router"
 
 export class ClassesService {
   private classes: Class[] = [];
-  private classesUpdated = new Subject<Class[]>();
+  private classesUpdated = new Subject<{courses: Class[]; courseCount: number}>();
   private router: Router;
   constructor(private http: HttpClient, router: Router) {
     this.router = router;
@@ -17,10 +17,10 @@ export class ClassesService {
   getClasses(classesPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${classesPerPage}&page=${currentPage}`;
     //classesData is what is recieved from the request
-    this.http.get<{message: string, classes: any}>('http://localhost:3000/api/classes' + queryParams)
+    this.http.get<{message: string, classes: any, maxPosts: number}>('http://localhost:3000/api/classes' + queryParams)
     .pipe(
       map(classData => {
-        return classData.classes.map(c => {
+        return { courses: classData.classes.map(c => {
           return {
             _id: c._id,
             className: c.className,
@@ -28,12 +28,14 @@ export class ClassesService {
             classDes: c.classDes,
             imagePath: c.imagePath
           };
-        });
+        }), maxPosts: classData.maxPosts};
       })
-    )
-    .subscribe(transformedClasses => {
-      this.classes = transformedClasses;
-      this.classesUpdated.next([...this.classes]);
+    ) //transofrmed classes data is the result of ^
+    .subscribe(transformedClassesData => {
+      this.classes = transformedClassesData.courses;
+      this.classesUpdated.next({
+        courses: [...this.classes],
+        courseCount: transformedClassesData.maxPosts});
     });
     // return this.classes;
   }
@@ -54,11 +56,11 @@ export class ClassesService {
     cData.append("image", image, name);
     this.http.post<{message: string, addedClass: Class}>('http://localhost:3000/api/classes', cData) // "make sure added class is the same name in models.class.js"
     .subscribe((responseData) => {
-      const addedClass: Class = {_id: responseData.addedClass._id, className: name, classWeight: weight, classDes: des, imagePath: responseData.addedClass.imagePath};
-      // const id = responseData.classId;
-      // addedClass._id = id;
-      this.classes.push(addedClass);
-      this.classesUpdated.next(this.classes);
+      // const addedClass: Class = {_id: responseData.addedClass._id, className: name, classWeight: weight, classDes: des, imagePath: responseData.addedClass.imagePath};
+      // // const id = responseData.classId;
+      // // addedClass._id = id;
+      // this.classes.push(addedClass);
+      // this.classesUpdated.next(this.classes);
       this.router.navigate(["/"]);
     });
 
@@ -66,11 +68,12 @@ export class ClassesService {
   }
 
   deletePost(classId: string) {
-    this.http.delete("http://localhost:3000/api/classes/" + classId).subscribe(() => {
-      const updatedClasses = this.classes.filter(classa => classa._id !== classId);
-        this.classes = updatedClasses;
-        this.classesUpdated.next(this.classes);
-    });
+    return this.http.delete("http://localhost:3000/api/classes/" + classId);
+    // .subscribe(() => {
+    //   const updatedClasses = this.classes.filter(classa => classa._id !== classId);
+    //     this.classes = updatedClasses;
+    //     this.classesUpdated.next(this.classes);
+    // });
   }
 
   updatePost(id: string, className: string, classWeight: string, classDes: string, image: File | string){
@@ -93,12 +96,12 @@ export class ClassesService {
     }
     this.http.put("http://localhost:3000/api/classes/" + id, clData)
     .subscribe(response => {
-      const updatedClasses = [...this.classes];
-      const oldClassIndex = updatedClasses.findIndex(c => c._id === id);
-      const updatedClass: Class = {_id: id, className: className, classWeight: classWeight, classDes: classDes, imagePath: ""};
-      updatedClasses[oldClassIndex] = updatedClass;
-      this.classes = updatedClasses;
-      this.classesUpdated.next([...this.classes]);
+      // const updatedClasses = [...this.classes];
+      // const oldClassIndex = updatedClasses.findIndex(c => c._id === id);
+      // const updatedClass: Class = {_id: id, className: className, classWeight: classWeight, classDes: classDes, imagePath: ""};
+      // updatedClasses[oldClassIndex] = updatedClass;
+      // this.classes = updatedClasses;
+      // this.classesUpdated.next([...this.classes]);
       this.router.navigate(["/"]);
     });
   }

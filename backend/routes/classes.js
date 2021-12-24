@@ -73,7 +73,7 @@ router.get("", (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   const classQuery = Class.find();
-
+  let fetchedClasses;
   if (pageSize && currentPage){
     classQuery
     .skip(pageSize * (currentPage - 1))
@@ -81,11 +81,15 @@ router.get("", (req, res, next) => {
   }
      //return all monogodb classes entries
     classQuery.then(documents => {
+      fetchedClasses = documents;
+      return Class.count();
+    }).then(count => {
       res.status(200).json({
         message: 'Classes fetched successfully',
-        classes: documents
+        classes: fetchedClasses,
+        maxPosts: count
       });
-    });
+   });
 });
 
 router.get("/:id", (req, res, next) => {

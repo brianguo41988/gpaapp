@@ -16,7 +16,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
   classesService: ClassesService;
   private classesSub: Subscription;
   isLoading = false;
-  totalClasses = 10;
+  totalClasses = 0;
   classesPerPage = 2;
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 7];
@@ -29,9 +29,10 @@ export class ClassListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.classesService.getClasses(this.classesPerPage, this.currentPage);
     this.classesSub = this.classesService.getPostUpdateListener()
-      .subscribe((classes: Class[]) => {
+      .subscribe((classData: {courses: Class[], courseCount: number}) => {
         this.isLoading = false;
-        this.classes = classes;
+        this.totalClasses = classData.courseCount;
+        this.classes = classData.courses;
       });
   }
 
@@ -40,7 +41,10 @@ export class ClassListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(classId: string){
-    this.classesService.deletePost(classId);
+    this.isLoading = true;
+    this.classesService.deletePost(classId).subscribe(() => {
+      this.classesService.getClasses(this.classesPerPage, this.currentPage);
+    });
   }
 
   onChangedPage(pageData: PageEvent){
