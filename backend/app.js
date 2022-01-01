@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const Class = require('./models/class');
 const mongoose = require('mongoose');
 const classesRoutes = require("./routes/classes");
+const userRoutes = require("./routes/user");
 const app = express();
 
 
@@ -82,4 +83,5 @@ app.use((req, res, next) => {
 
 
 app.use("/api/classes", classesRoutes);
+app.use("/api/user", userRoutes);
 module.exports = app;

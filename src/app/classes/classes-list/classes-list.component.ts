@@ -5,6 +5,7 @@ import { ClassesService } from "../classes.service";
 import { OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { PageEvent } from "@angular/material/paginator";
+import { AuthService } from "src/app/auth/auth.service";
 @Component({
   selector: 'app-class-list',
   templateUrl: './classes-list.component.html',
@@ -14,14 +15,16 @@ import { PageEvent } from "@angular/material/paginator";
 export class ClassListComponent implements OnInit, OnDestroy {
   classes: Class[] = [];
   classesService: ClassesService;
+  private authStatusSub: Subscription;
   private classesSub: Subscription;
+  userIsAuthenticated = false;
   isLoading = false;
   totalClasses = 0;
   classesPerPage = 2;
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 7];
 
-  constructor(classesService: ClassesService){
+  constructor(classesService: ClassesService, private authService: AuthService){
     this.classesService = classesService;
   };
 
@@ -34,10 +37,19 @@ export class ClassListComponent implements OnInit, OnDestroy {
         this.totalClasses = classData.courseCount;
         this.classes = classData.courses;
       });
+      this.userIsAuthenticated = this.authService.getIsAuth();
+      this.authStatusSub = this.authService.getAuthStatusListener()
+        .subscribe(
+        isAuthenticated => {
+          this.userIsAuthenticated = isAuthenticated;
+        }
+      );
+
   }
 
   ngOnDestroy(): void {
       this.classesSub.unsubscribe();
+      this.authStatusSub.unsubscribe();
   }
 
   onDelete(classId: string){
