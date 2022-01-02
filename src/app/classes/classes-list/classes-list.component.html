@@ -9,7 +9,7 @@
     </div>
     <p>{{ class.classWeight}}</p>
     <p>{{ class.classDes }}</p>
-    <mat-action-row *ngIf="userIsAuthenticated">
+    <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
       <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
       <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
     </mat-action-row>

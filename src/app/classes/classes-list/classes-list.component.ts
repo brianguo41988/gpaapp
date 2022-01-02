@@ -22,7 +22,8 @@ export class ClassListComponent implements OnInit, OnDestroy {
   totalClasses = 0;
   classesPerPage = 2;
   currentPage = 1;
-  pageSizeOptions = [1, 2, 5, 7];
+  pageSizeOptions = [1, 2, 5, 10];
+  userId: string;
 
   constructor(classesService: ClassesService, private authService: AuthService){
     this.classesService = classesService;
@@ -31,6 +32,8 @@ export class ClassListComponent implements OnInit, OnDestroy {
   ngOnInit(){
     this.isLoading = true;
     this.classesService.getClasses(this.classesPerPage, this.currentPage);
+    this.userId = this.authService.getUserId();
+    console.log(this.userId +  "USER ID");
     this.classesSub = this.classesService.getPostUpdateListener()
       .subscribe((classData: {courses: Class[], courseCount: number}) => {
         this.isLoading = false;
@@ -42,6 +45,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
         .subscribe(
         isAuthenticated => {
           this.userIsAuthenticated = isAuthenticated;
+          this.userId = this.authService.getUserId();
         }
       );
 

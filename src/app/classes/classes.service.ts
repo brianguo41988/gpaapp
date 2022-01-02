@@ -26,7 +26,8 @@ export class ClassesService {
             className: c.className,
             classWeight: c.classWeight,
             classDes: c.classDes,
-            imagePath: c.imagePath
+            imagePath: c.imagePath,
+            creator: c.creator
           };
         }), maxPosts: classData.maxPosts};
       })
@@ -45,7 +46,7 @@ export class ClassesService {
   }
 
   getClass(id: string){
-    return this.http.get<{_id: string, className: string, classWeight: string, classDes: string, imagePath:string}>("http://localhost:3000/api/classes/" + id);
+    return this.http.get<{_id: string, className: string, classWeight: string, classDes: string, imagePath:string, creator: string}>("http://localhost:3000/api/classes/" + id);
   }
 
   addPost(name: string, weight: string, des: string, image: File){
@@ -91,7 +92,8 @@ export class ClassesService {
         className: className,
         classWeight: classWeight,
         classDes: classDes,
-        imagePath: image
+        imagePath: image,
+        creator: null // creator id is handled on the server side in routes/classes in updatedClasses
       }
     }
     this.http.put("http://localhost:3000/api/classes/" + id, clData)

@@ -4,4 +4,5 @@ export interface Class {
   classWeight: string;
   classDes: string;
   imagePath: string;
+  creator: string;
 }

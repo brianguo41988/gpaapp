@@ -72,12 +72,12 @@ export class ClassCreateComponent implements OnInit {
       this.isLoading = true; //spinner
       this.classesService.getClass(this.classId).subscribe(classData => {
         this.isLoading = false;
-        this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, imagePath: classData.imagePath};
+        this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, imagePath: classData.imagePath, creator: classData.creator};
         this.form.setValue({
           className: this.theclass.className,
           classWeight: this.theclass.classWeight,
           classDes: this.theclass.classDes,
-          image: this.theclass.imagePath});
+          image: this.theclass.imagePath}); // we didnt add creator?
       });
      }else{
        this.mode = 'create';
