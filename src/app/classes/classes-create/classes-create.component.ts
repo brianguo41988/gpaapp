@@ -1,17 +1,19 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ClassesService } from "../classes.service";
 import { Class } from "../class.model"
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { viewClassName } from "@angular/compiler";
+import { Subscription } from "rxjs";
 import { mimeType } from "./mime-type.validator";
+import { AuthService } from "src/app/auth/auth.service";
 @Component({
   selector: 'app-class-create',
   templateUrl: './classes-create.component.html',
   styleUrls: ['./classes-create.component.css']
 })
 
-export class ClassCreateComponent implements OnInit {
+export class ClassCreateComponent implements OnInit, OnDestroy {
   classesService: ClassesService;
   classes: Class[] = [];
   route: ActivatedRoute;
@@ -21,10 +23,13 @@ export class ClassCreateComponent implements OnInit {
   private mode = 'create';
   private classId: string;
   imagePreview: string; //convert image to url
+  private authStatusSub: Subscription;
+  private authService: AuthService;
 
-  constructor (classesService: ClassesService, route: ActivatedRoute){
+  constructor (classesService: ClassesService, route: ActivatedRoute, authService: AuthService){
     this.classesService = classesService;
     this.route = route;
+    this.authService = authService;
   }
 
   onSavePost(){
@@ -56,6 +61,11 @@ export class ClassCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
+      authStatus => {
+        this.isLoading = false;
+      }
+    );
    this.form = new FormGroup({
     'className': new FormControl(null, {
       validators: [Validators.required, Validators.minLength(3)]}),
@@ -84,5 +94,9 @@ export class ClassCreateComponent implements OnInit {
        this.classId = null;
      }
    });
+  }
+
+  ngOnDestroy(): void {
+      this.authStatusSub.unsubscribe();
   }
 }

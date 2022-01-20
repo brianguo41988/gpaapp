@@ -60,6 +60,8 @@ export class ClassListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.classesService.deletePost(classId).subscribe(() => {
       this.classesService.getClasses(this.classesPerPage, this.currentPage);
+    }, () => {
+      this.isLoading = false;
     });
   }
 

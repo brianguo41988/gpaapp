@@ -49,7 +49,11 @@ router.post("", checkAuth, multer({storage: storage}).single("image"), (req, res
         imagePath: createdClass.imagePath
       }
     });
-  });
+  }).catch(error => {
+    res.status(500).json({
+      message: "Creating a post failed"
+    })
+  })
 });
 
 router.put("/:id", checkAuth, multer({storage: storage}).single("image"), (req, res, next) => {
@@ -73,6 +77,11 @@ router.put("/:id", checkAuth, multer({storage: storage}).single("image"), (req, 
     } else {
       res.status(401).json({message: "Ya not authorized edit brah"});
     }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Couldn't update post"
+    })
   });
 });
 
@@ -96,6 +105,11 @@ router.get("", (req, res, next) => {
         classes: fetchedClasses,
         maxPosts: count
       });
+   })
+   .catch(error => {
+     res.status(500).json({
+       message: "Fetching classes failed"
+     })
    });
 });
 
@@ -106,8 +120,12 @@ router.get("/:id", (req, res, next) => {
     }else{
       res.status(404).json({message: "pnf"});
     }
-  })
-})
+  }).catch(error => {
+    res.status(500).json({
+      message: "Fetching posts failed"
+    })
+  });
+});
 router.delete("/:id", checkAuth, (req, res, next) => {
   Class.deleteOne({_id: req.params.id, creator: req.userData.userId}).then(result => {
     // console.log("result is: ", result);
@@ -116,6 +134,10 @@ router.delete("/:id", checkAuth, (req, res, next) => {
     } else {
       res.status(401).json({message: "Ya not authorized to delete brah" + result.n});
     }
+  }).catch(error => {
+    res.status(500).json({
+      message: "Fetching classes failed"
+    })
   });
 });
 
