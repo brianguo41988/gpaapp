@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const classesRoutes = require("./routes/classes");
 const userRoutes = require("./routes/user");
 const app = express();
-
+app.use(express.static('public'));
 
 mongoose.connect("mongodb+srv://brianguo:jBw739r2@cluster0.p36v5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
   .then(() => {
@@ -81,7 +81,7 @@ app.use((req, res, next) => {
 //   });
 // });
 
-
+app.use('/html-images/', express.static('public'))
 app.use("/api/classes", classesRoutes);
 app.use("/api/user", userRoutes);
 module.exports = app;

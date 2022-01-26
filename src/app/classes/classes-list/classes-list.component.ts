@@ -20,9 +20,9 @@ export class ClassListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   isLoading = false;
   totalClasses = 0;
-  classesPerPage = 2;
+  classesPerPage = 4;
   currentPage = 1;
-  pageSizeOptions = [1, 2, 5, 10];
+  pageSizeOptions = [4];
   userId: string;
 
   constructor(classesService: ClassesService, private authService: AuthService){
@@ -38,7 +38,15 @@ export class ClassListComponent implements OnInit, OnDestroy {
       .subscribe((classData: {courses: Class[], courseCount: number}) => {
         this.isLoading = false;
         this.totalClasses = classData.courseCount;
-        this.classes = classData.courses;
+
+        // for loop that check to see if userId is correct to show correct classes
+        for (var i = 0; i < this.totalClasses; i++){
+          if (classData.courses[i].creator == this.userId){
+            this.classes.push(classData.courses[i]);
+          }
+        }
+        // this.classes = classData.courses;
+
       });
       this.userIsAuthenticated = this.authService.getIsAuth();
       this.authStatusSub = this.authService.getAuthStatusListener()

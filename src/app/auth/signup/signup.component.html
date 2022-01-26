@@ -1,14 +1,91 @@
-<mat-card>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
-    <mat-form-field>
-      <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel" required email>
-      <mat-error *ngIf="emailInput.invalid"> Please enter a valid email. </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
-      <mat-error *ngIf="passwordInput.invalid"> Please enter a valid password. </mat-error>
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Signup</button>
-  </form>
-</mat-card>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html, body, h1, h2, h3, h4, h5, p, a, button, input,  mat-expansion-panel-header {font-family: "Raleway", sans-serif}
+
+h1 {
+  text-align: center;
+}
+
+.container img {
+    width: 50%;
+    height: auto;
+}
+img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 50%;
+}
+p, a, button {
+  text-align: center;
+}
+
+.mat-expansion-panel-header-title {
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    height: 60px;
+}
+
+.mat-action-row {
+  justify-content: left;
+  padding:0%;
+}
+
+.mat-card {
+  /* all:initial; */
+  position:initial;
+  transition: initial;
+  width: 300px;
+  height: 250px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-div{
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* body {
+  background-image: url('https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/272615006_1070862517102352_7637773252403517567_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=730e14&_nc_ohc=qFo66QKHFzUAX_Mswuy&_nc_ht=scontent-atl3-1.xx&oh=00_AT9rFm1HCmXIom02Cug7m_IlNcJwak1-YOew5zJp7MnyWQ&oe=61F3549D');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding: 100px 100px 150px 100px;
+} */
+
+</style>
+
+<body>
+<div>
+  <div class="prompt-div">
+    <h1>Signup</h1>
+  </div>
+</div>
+
+
+<div class="main-div">
+  <mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel" required email>
+        <mat-error *ngIf="emailInput.invalid"> Please enter a valid email. </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
+        <mat-error *ngIf="passwordInput.invalid"> Please enter a valid password. </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="" type="submit" *ngIf="!isLoading">Signup</button>
+    </form>
+  </mat-card>
+</div>
+</body>
+

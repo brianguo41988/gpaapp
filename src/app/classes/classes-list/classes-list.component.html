@@ -1,21 +1,87 @@
-<mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-accordion multi="true" *ngIf="classes.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let class of classes">
-    <mat-expansion-panel-header>
-      {{ class.className }}
-    </mat-expansion-panel-header>
-    <div class="class-image">
-      <img [src]="class.imagePath" [alt]="class.className">
-    </div>
-    <p>{{ class.classWeight}}</p>
-    <p>{{ class.classDes }}</p>
-    <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
-      <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
-      <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-<mat-paginator [length] = "totalClasses" [pageSize]="classesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="classes.length > 0">
+<!-- https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_analytics&stacked=h -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html, body, h1, h2, h3, h4, h5, p, a, button, mat-expansion-panel-header {font-family: "Raleway", sans-serif}
 
-</mat-paginator>
-<p class="info-text mat-body-1" *ngIf="classes.length <= 0 && !isLoading">No posts added yet</p>
+h1 {
+  text-align: center;
+}
+
+.container img {
+    width: 50%;
+    height: auto;
+}
+img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 50%;
+}
+p, a, button {
+  text-align: center;
+}
+
+.mat-expansion-panel-header-title {
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    height: 60px;
+}
+
+.mat-action-row {
+  justify-content: left;
+  padding:0%;
+}
+
+/* body {
+  background-image: url('https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/272615006_1070862517102352_7637773252403517567_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=730e14&_nc_ohc=qFo66QKHFzUAX_Mswuy&_nc_ht=scontent-atl3-1.xx&oh=00_AT9rFm1HCmXIom02Cug7m_IlNcJwak1-YOew5zJp7MnyWQ&oe=61F3549D');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding: 135px 100px 150px 100px;
+} */
+
+</style>
+<body>
+<h1>Classes</h1>
+
+<div class="w3-panel">
+  <div class="w3-row-padding" style="margin:0 -16px">
+    <div class="w3-third" style="border-radius: 25px; height: 370px; width: 200px;">
+      <!-- <h5 style="text-align:center">Profile</h5> -->
+      <mat-action-row *ngIf="!userIsAuthenticated" class="centertext">
+          <p class="centertext">Please login to track GPA.</p>
+      </mat-action-row>
+      <!-- <img src="" style="width:100%" alt="Class"> -->
+    </div>
+
+    <div class="w3-twothird">
+      <!-- <h5>Classes</h5> -->
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <mat-accordion multi="true" *ngIf="classes.length > 0 && !isLoading">
+        <mat-expansion-panel *ngFor="let class of classes">
+          <mat-expansion-panel-header class="mat-expansion-panel-header-title">
+            <p>{{ class.className }}</p>
+          </mat-expansion-panel-header>
+          <!-- <div class="class-image container">
+            <img [src]="class.imagePath" [alt]="class.className">
+          </div> -->
+          <p>Weight: {{ class.classWeight}}</p>
+          <p>Grade: {{ class.classDes }}</p>
+          <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
+            <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
+            <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-paginator [length] = "totalClasses" [pageSize]="classesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="classes.length > 0">
+
+      </mat-paginator>
+      <p class="info-text mat-body-1" *ngIf="classes.length <= 0 && !isLoading">No classes available.</p>
+    </div>
+  </div>
+</div>
+</body>
+
