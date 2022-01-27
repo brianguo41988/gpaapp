@@ -14,8 +14,8 @@ hr {
   height: 0.25px;
 }
 </style>
-
-<mat-card>
+<body style="padding-top: 7%;">
+<mat-card style="border-radius: 25px;">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
     <mat-form-field>
@@ -44,3 +44,4 @@ hr {
 
   </form>
 </mat-card>
+</body>
