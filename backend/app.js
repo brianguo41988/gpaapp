@@ -84,4 +84,6 @@ app.use((req, res, next) => {
 app.use('/html-images/', express.static('public'))
 app.use("/api/classes", classesRoutes);
 app.use("/api/user", userRoutes);
+app.use("/profile", userRoutes);
+app.use("/api/user/signup", userRoutes);
 module.exports = app;

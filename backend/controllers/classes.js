@@ -60,15 +60,22 @@ exports.updateClass = (req, res, next) => {
 exports.getClasses = (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
-  const classQuery = Class.find();
-  let fetchedClasses;
+  const uid = req.query.uid;
+  // console.log("hi");
+  let fetchedClasses = [];
+
+  const classQuery = Class.find({creator:uid});
+  // const classQuery = Class.find();
   if (pageSize && currentPage){
     classQuery
     .skip(pageSize * (currentPage - 1))
     .limit(pageSize);
   }
+  // console.log(classQuery);
+  // console.log(classQuery);
      //return all monogodb classes entries
     classQuery.then(documents => {
+      console.log("entered then");
       fetchedClasses = documents;
       return Class.count();
     }).then(count => {

@@ -23,7 +23,8 @@ export class ClassListComponent implements OnInit, OnDestroy {
   classesPerPage = 4;
   currentPage = 1;
   pageSizeOptions = [4];
-  userId: string;
+  userId:string;
+  nom:string;
 
   constructor(classesService: ClassesService, private authService: AuthService){
     this.classesService = classesService;
@@ -31,21 +32,28 @@ export class ClassListComponent implements OnInit, OnDestroy {
 
   ngOnInit(){
     this.isLoading = true;
-    this.classesService.getClasses(this.classesPerPage, this.currentPage);
     this.userId = this.authService.getUserId();
+
+    // if user does not login classes will not show
+    if (!this.userId){
+      this.isLoading = false;
+      return;
+    }
+
+    this.classesService.getClasses(this.classesPerPage, this.currentPage, this.userId);
     console.log(this.userId +  "USER ID");
     this.classesSub = this.classesService.getPostUpdateListener()
       .subscribe((classData: {courses: Class[], courseCount: number}) => {
         this.isLoading = false;
         this.totalClasses = classData.courseCount;
-
         // for loop that check to see if userId is correct to show correct classes
-        for (var i = 0; i < this.totalClasses; i++){
-          if (classData.courses[i].creator == this.userId){
-            this.classes.push(classData.courses[i]);
-          }
-        }
-        // this.classes = classData.courses;
+        // for (var i = 0; i < this.totalClasses; i++){
+          // if (classData.courses[i].creator == this.userId){
+          //   this.classes.push(classData.courses[i]);
+          // }
+        // }
+
+        this.classes = classData.courses;
 
       });
       this.userIsAuthenticated = this.authService.getIsAuth();
@@ -56,18 +64,23 @@ export class ClassListComponent implements OnInit, OnDestroy {
           this.userId = this.authService.getUserId();
         }
       );
-
+        // this.authService.getFname();
+        // console.log(this.classes.length);
   }
 
   ngOnDestroy(): void {
+    if (!this.userId){
+      return;
+    }
       this.classesSub.unsubscribe();
       this.authStatusSub.unsubscribe();
+      this.classes = [];
   }
 
   onDelete(classId: string){
     this.isLoading = true;
     this.classesService.deletePost(classId).subscribe(() => {
-      this.classesService.getClasses(this.classesPerPage, this.currentPage);
+      this.classesService.getClasses(this.classesPerPage, this.currentPage, this.userId);
     }, () => {
       this.isLoading = false;
     });
@@ -77,7 +90,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
     // this.isLoading = true;
     this.currentPage = pageData.pageIndex + 1;
     this.classesPerPage = pageData.pageSize;
-    this.classesService.getClasses(this.classesPerPage, this.currentPage);
+    this.classesService.getClasses(this.classesPerPage, this.currentPage, this.userId);
   }
 
 }

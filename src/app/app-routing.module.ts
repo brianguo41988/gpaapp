@@ -4,6 +4,7 @@ import { ClassCreateComponent } from './classes/classes-create/classes-create.co
 import { ClassListComponent } from './classes/classes-list/classes-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'create', component: ClassCreateComponent, canActivate: [AuthGuard]},
   { path: 'edit/:classId', component: ClassCreateComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent},
-  { path: 'signup', component: SignupComponent}
+  { path: 'signup', component: SignupComponent},
+  { path: 'profile', component: ProfileComponent},
 ];
 
 @NgModule({

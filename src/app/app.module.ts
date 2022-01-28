@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms'
 import { ClassListComponent } from './classes/classes-list/classes-list.component';
 import { ClassCreateComponent } from './classes/classes-create/classes-create.component'
  import { ReactiveFormsModule} from '@angular/forms'
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -35,7 +36,8 @@ import { ClassCreateComponent } from './classes/classes-create/classes-create.co
     SignupComponent,
     ErrorComponent,
     ClassCreateComponent,
-    ClassListComponent
+    ClassListComponent,
+    ProfileComponent
   ],
   imports: [
     FormsModule,

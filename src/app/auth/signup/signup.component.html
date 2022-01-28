@@ -47,10 +47,14 @@ p, a, button {
 }
 
 .main-div{
-  height: 40vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mat-card{
+  height:300px;
 }
 
 /* body {
@@ -76,7 +80,15 @@ p, a, button {
     <mat-spinner *ngIf="isLoading"></mat-spinner>
     <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
-        <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel" required email>
+        <input matInput name="fname" ngModel type="fname" placeholder="First Name" #fnameInput="ngModel" required>
+        <mat-error *ngIf="emailInput.invalid"> Please enter a valid email. </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="lname" ngModel type="lname" placeholder="Last Name" #lnameInput="ngModel" required>
+        <mat-error *ngIf="emailInput.invalid"> Please enter a valid email. </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel" required>
         <mat-error *ngIf="emailInput.invalid"> Please enter a valid email. </mat-error>
       </mat-form-field>
       <mat-form-field>
