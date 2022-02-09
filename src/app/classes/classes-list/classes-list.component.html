@@ -47,42 +47,51 @@ p, a, button {
 <body>
 <h1>Classes</h1>
 
-<div class="w3-panel">
-  <div class="w3-row-padding" style="margin:0 -16px">
-    <div class="w3-third" style="border-radius: 25px; height: 370px; width: 200px;">
-      <!-- <h5 style="text-align:center">Profile</h5> -->
-      <mat-action-row *ngIf="!userIsAuthenticated" class="centertext">
-          <p class="centertext">Please login to track GPA.</p>
-      </mat-action-row>
-      <!-- <img src="" style="width:100%" alt="Class"> -->
+  <!-- <h5 style="text-align:center">Profile</h5> -->
+   <mat-action-row *ngIf="!userIsAuthenticated && (classes.length <= 0 && !isLoading)" class="centertext">
+    <div style="border-radius: 25px; height: 370px; width: 200px;  margin: auto;
+    width: 50%;
+    border: 1px solid;
+    padding: 10px;">
+      <p class="centertext">Please login to track GPA.</p>
+      <p>No Classes Available</p>
     </div>
+  </mat-action-row>
+  <!-- <img src="" style="width:100%" alt="Class"> -->
 
-    <div class="w3-twothird">
-      <!-- <h5>Classes</h5> -->
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
-      <mat-accordion multi="true" *ngIf="classes.length > 0 && !isLoading">
-        <mat-expansion-panel *ngFor="let class of classes">
-          <mat-expansion-panel-header class="mat-expansion-panel-header-title">
-            <p>{{ class.className }}</p>
-          </mat-expansion-panel-header>
-          <!-- <div class="class-image container">
-            <img [src]="class.imagePath" [alt]="class.className">
-          </div> -->
-          <p>Weight: {{ class.classWeight}}</p>
-          <p>Grade: {{ class.classDes }}</p>
-          <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
-            <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
-            <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <mat-paginator [length]="totalClasses" [pageSize]="classesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="classes.length > 0">
 
-      </mat-paginator>
-      <!-- <p class="info-text mat-body-1" *ngIf="classes.length <= 0 && !isLoading">No classes available.</p>  -->
-      <p class="info-text mat-body-1" *ngIf="(classes.length <= 0 && !isLoading)">No classes available.</p>
+<div class="w3-panel">
+  <div class>
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-third" style="border-radius: 25px; height: 370px; width: 200px;"></div>
+      <div class="w3-twothird">
+        <!-- <h5>Classes</h5> -->
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <mat-accordion multi="true" *ngIf="classes.length > 0 && !isLoading">
+          <mat-expansion-panel *ngFor="let class of classes">
+            <mat-expansion-panel-header class="mat-expansion-panel-header-title">
+              <p>{{ class.className }}</p>
+            </mat-expansion-panel-header>
+            <!-- <div class="class-image container">
+              <img [src]="class.imagePath" [alt]="class.className">
+            </div> -->
+            <p>Weight: {{ class.classWeight}}</p>
+            <p>Grade: {{ class.classDes }}</p>
+            <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
+              <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
+              <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-paginator [length]="totalClasses" [pageSize]="classesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="classes.length > 0">
+
+        </mat-paginator>
+        <!-- <p class="info-text mat-body-1" *ngIf="classes.length <= 0 && !isLoading">No classes available.</p>  -->
+        <!-- <p class="info-text mat-body-1" *ngIf="(classes.length <= 0 && !isLoading)">No classes available.</p> -->
+      </div>
     </div>
   </div>
 </div>
+
 </body>
 
