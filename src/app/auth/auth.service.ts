@@ -6,7 +6,7 @@ import { Router } from "@angular/router"
 import { TOUCH_BUFFER_MS } from "@angular/cdk/a11y/input-modality/input-modality-detector";
 import { environment } from "src/environments/environment";
 
-const BACKEND_URL = environment.apiUrl;
+const BACKEND_URL = "https://gpaapp.herokuapp.com/";
 
 @Injectable ({ providedIn: "root"})
 export class AuthService {

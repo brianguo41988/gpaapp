@@ -5,7 +5,7 @@ import { HttpClient }  from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
-const BACKEND_URL = environment.apiUrl;
+const BACKEND_URL = "https://gpaapp.herokuapp.com/";
 @Injectable({providedIn: 'root'}) // makes it where there is only one instance of this class
 export class ClassesService {
   private classes: Class[] = [];
