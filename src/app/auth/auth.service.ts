@@ -4,6 +4,9 @@ import { AuthData } from "./auth-data.model";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router"
 import { TOUCH_BUFFER_MS } from "@angular/cdk/a11y/input-modality/input-modality-detector";
+import { environment } from "src/environments/environment";
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable ({ providedIn: "root"})
 export class AuthService {
@@ -51,7 +54,7 @@ export class AuthService {
     const queryParams = `?uid=${userId}`;
     // console.log("hi");
     //classesData is what is recieved from the request
-    this.http.get<{message: string, classes: any}>('http://localhost:3000/api/user/signup' + queryParams).subscribe(response => {
+    this.http.get<{message: string, classes: any}>(BACKEND_URL + 'api/user/signup' + queryParams).subscribe(response => {
       this.lname = response.classes[0].lname;
       this.fname = response.classes[0].fname;
       this.email = response.classes[0].email;
@@ -71,7 +74,7 @@ export class AuthService {
 
   createUser(email: string, password: string, fname: string, lname: string) {
     const authData: AuthData = {email: email, password: password, fname: fname, lname: lname};
-    return this.http.post("http://localhost:3000/api/user/signup", authData).subscribe(() => {
+    return this.http.post(BACKEND_URL + "api/user/signup", authData).subscribe(() => {
       this.router.navigate(["/"]);
     }, error => {
       this.authStatusListener.next(false);
@@ -80,7 +83,7 @@ export class AuthService {
 
   login(email: string, password: string){
     const authData  = {email: email, password: password};
-    this.http.post<{token: string, expiresIn: number, userId: string}>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{token: string, expiresIn: number, userId: string}>(BACKEND_URL + "api/user/login", authData)
     .subscribe(response => {
       const token = response.token;
       this.token = token;

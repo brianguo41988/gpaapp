@@ -27,11 +27,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", express.static(path.join(__dirname, "../dist/gpaApp")));
+// app.use("/", express.static(path.join(__dirname, "../dist/gpaApp")));
 
-app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "../dist/gpaApp/index.html"));
-})
+// app.use((req, res, next) => {
+//   res.sendFile(path.join(__dirname, "../dist/gpaApp/index.html"));
+// })
 
 // app.post("/api/classes", (req, res, next) => {
 //   const addedClass = new Class({

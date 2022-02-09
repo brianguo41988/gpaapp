@@ -3,9 +3,10 @@ import { Subject }from 'rxjs';
 import { Class } from './class.model'
 import { HttpClient }  from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import { Router } from "@angular/router"
+import { Router } from "@angular/router";
+import { environment } from 'src/environments/environment';
+const BACKEND_URL = environment.apiUrl;
 @Injectable({providedIn: 'root'}) // makes it where there is only one instance of this class
-
 export class ClassesService {
   private classes: Class[] = [];
   private classesUpdated = new Subject<{courses: Class[]; courseCount: number}>();
@@ -27,7 +28,7 @@ export class ClassesService {
   getClassesForGPA(userId: string) {
     this.GPA = 0.0;
     const queryParams = `?uid=${userId}`;
-    this.http.get<{message: string, classes: any}>('http://localhost:3000/api/classes' + queryParams).subscribe(transformedClassesData => {
+    this.http.get<{message: string, classes: any}>(BACKEND_URL + 'api/classes' + queryParams).subscribe(transformedClassesData => {
       var total = 0;
 
       for (var i = 0; i < transformedClassesData.classes.length; i++){
@@ -74,7 +75,7 @@ export class ClassesService {
   getClasses(classesPerPage: number, currentPage: number, userId: string) {
     const queryParams = `?pagesize=${classesPerPage}&page=${currentPage}&uid=${userId}`;
     //classesData is what is recieved from the request
-    this.http.get<{message: string, classes: any, maxPosts: number}>('http://localhost:3000/api/classes' + queryParams)
+    this.http.get<{message: string, classes: any, maxPosts: number}>(BACKEND_URL + 'api/classes' + queryParams)
     .pipe(
       map(classData => {
         return { courses: classData.classes.map(c => {
@@ -153,7 +154,7 @@ export class ClassesService {
     cData.append("classWeight", weight);
     cData.append("classDes", des);
     cData.append("image", image, name);
-    this.http.post<{message: string, addedClass: Class}>('http://localhost:3000/api/classes', cData) // "make sure added class is the same name in models.class.js"
+    this.http.post<{message: string, addedClass: Class}>(BACKEND_URL + 'api/classes', cData) // "make sure added class is the same name in models.class.js"
     .subscribe((responseData) => {
       // const addedClass: Class = {_id: responseData.addedClass._id, className: name, classWeight: weight, classDes: des, imagePath: responseData.addedClass.imagePath};
       // // const id = responseData.classId;
@@ -165,7 +166,7 @@ export class ClassesService {
   }
 
   deletePost(classId: string) {
-    return this.http.delete("http://localhost:3000/api/classes/" + classId);
+    return this.http.delete(BACKEND_URL + "api/classes/" + classId);
     // .subscribe(() => {
     //   const updatedClasses = this.classes.filter(classa => classa._id !== classId);
     //     this.classes = updatedClasses;
@@ -192,7 +193,7 @@ export class ClassesService {
         creator: null // creator id is handled on the server side in routes/classes in updatedClasses
       }
     }
-    this.http.put("http://localhost:3000/api/classes/" + id, clData)
+    this.http.put(BACKEND_URL + "api/classes/" + id, clData)
     .subscribe(response => {
       // const updatedClasses = [...this.classes];
       // const oldClassIndex = updatedClasses.findIndex(c => c._id === id);
