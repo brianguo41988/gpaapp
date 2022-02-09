@@ -1,1 +1,1 @@
-web: node notindex.js
+web: node server.js
