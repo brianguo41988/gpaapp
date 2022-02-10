@@ -45,7 +45,9 @@ p, a, button {
 
 </style>
 <body>
-<h1>Classes</h1>
+<mat-action-row *ngIf="classes.length == 0">
+  <p>Please add some classes</p>
+</mat-action-row>
 
   <!-- <h5 style="text-align:center">Profile</h5> -->
    <mat-action-row *ngIf="!userIsAuthenticated && (classes.length <= 0 && !isLoading)" class="centertext">
