@@ -45,7 +45,7 @@ p, a, button {
 
 </style>
 <body>
-<mat-action-row *ngIf="classes.length == 0">
+<mat-action-row *ngIf="userIsAuthenticated && classes.length == 0">
   <p>Please add some classes</p>
 </mat-action-row>
 
