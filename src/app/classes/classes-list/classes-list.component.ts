@@ -20,7 +20,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   isLoading = false;
   totalClasses = 0;
-  classesPerPage = 4;
+  classesPerPage = 120;
   currentPage = 1;
   pageSizeOptions = [4];
   userId:string;
