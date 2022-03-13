@@ -66,11 +66,11 @@ exports.getClasses = (req, res, next) => {
 
   const classQuery = Class.find({creator:uid});
   // const classQuery = Class.find();
-  if (pageSize && currentPage){
-    classQuery
-    .skip(pageSize * (currentPage - 1))
-    .limit(pageSize);
-  }
+  // if (pageSize && currentPage){
+  //   classQuery
+  //   .skip(pageSize * (currentPage - 1))
+  //   .limit(pageSize);
+  // }
   // console.log(classQuery);
   // console.log(classQuery);
      //return all monogodb classes entries
