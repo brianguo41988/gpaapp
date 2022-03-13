@@ -145,7 +145,7 @@ export class ClassesService {
   }
 
   getClass(id: string){
-    return this.http.get<{_id: string, className: string, classWeight: string, classDes: string, imagePath:string, creator: string}>("http://localhost:3000/api/classes/" + id);
+    return this.http.get<{_id: string, className: string, classWeight: string, classDes: string, imagePath:string, creator: string}>(BACKEND_URL + id);
   }
 
   addPost(name: string, weight: string, des: string, image: File){
