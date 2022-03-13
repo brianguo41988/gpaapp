@@ -32,35 +32,6 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
     this.authService = authService;
   }
 
-  onSavePost(){
-    if (this.form.invalid){
-      return;
-    }
-    this.isLoading = true;
-    if (this.mode === 'create'){
-      this.classesService.getClassesForGPA(this.authService.getUserId());
-      this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
-    }else{
-      this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
-    }
-    this.form.reset();
-
-  }
-
-  onImagePicked(event: Event){
-    const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({image: file});
-    this.form.get('image').updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-
-
-
-  }
-
   ngOnInit(): void {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
@@ -96,6 +67,35 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
        this.classId = null;
      }
    });
+  }
+
+  onSavePost(){
+    if (this.form.invalid){
+      return;
+    }
+    this.isLoading = true;
+    if (this.mode === 'create'){
+      this.classesService.getClassesForGPA(this.authService.getUserId());
+      this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
+    }else{
+      this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
+    }
+    this.form.reset();
+
+  }
+
+  onImagePicked(event: Event){
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({image: file});
+    this.form.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+
+
+
   }
 
   ngOnDestroy(): void {
