@@ -149,7 +149,7 @@ export class ClassesService {
   }
 
   // addPost(name: string, weight: string, des: string, image: File){
-  addPost(name: string, weight: string, des: string){
+    addPost(name: string, weight: string, des: string){
     const cData = new FormData();
     cData.append("className", name);
     cData.append("classWeight", weight);
@@ -157,16 +157,11 @@ export class ClassesService {
     // cData.append("image", image, name);
     this.http.post<{message: string, addedClass: Class}>(BACKEND_URL + 'api/classes', cData) // "make sure added class is the same name in models.class.js"
     .subscribe((responseData) => {
-
-      // uncommented what is below, it was working before without
-
-      // const addedClass: Class = {_id: responseData.addedClass._id, className: name, classWeight: weight, classDes: des, imagePath: responseData.addedClass.imagePath};
       // const addedClass: Class = {_id: responseData.addedClass._id, className: name, classWeight: weight, classDes: des, imagePath: responseData.addedClass.imagePath};
       // // const id = responseData.classId;
       // // addedClass._id = id;
       // this.classes.push(addedClass);
       // this.classesUpdated.next(this.classes);
-
       this.router.navigate(["/"]);
     });
   }
@@ -188,16 +183,6 @@ export class ClassesService {
       clData.append("className", className);
       clData.append("classWeight", classWeight);
       clData.append("classDes", classDes);
-
-      // clData = {
-      // _id: id,
-      // className: className,
-      // classWeight: classWeight,
-      // classDes: classDes,
-      //   // imagePath: image,
-      // creator: null // creator id is handled on the server side in routes/classes in updatedClasses
-      // }
-
       // clData.append("image", image, className);
 
     // if (typeof(image) === 'object'){

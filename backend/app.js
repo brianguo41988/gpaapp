@@ -87,7 +87,7 @@ app.use("/", express.static(path.join(__dirname, "../dist/gpaApp")));
 //   });
 // });
 
-app.use('/html-images/', express.static('public'));
+app.use('/html-images/', express.static('public'))
 app.use("/api/classes", classesRoutes);
 app.use("/api/user", userRoutes);
 app.use("/profile", userRoutes);

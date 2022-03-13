@@ -10,8 +10,7 @@ const ClassController = require("../controllers/classes");
 // router.post("", checkAuth, extractFile, ClassController.createClass);
 router.post("", checkAuth, ClassController.createClass);
 
-// router.put("/:id", checkAuth, extractFile, ClassController.updateClass);
-router.put("/:id", checkAuth, ClassController.updateClass);
+router.put("/:id", checkAuth, extractFile, ClassController.updateClass);
 
 router.get("", ClassController.getClasses);
 
