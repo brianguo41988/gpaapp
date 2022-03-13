@@ -25,11 +25,11 @@ hr {
     <mat-form-field>
       <input matInput type="text" formControlName="classWeight" placeholder="Weight/Credit Hours">
       <mat-error *ngIf="form.get('classWeight').invalid"> Please enter the class weight. </mat-error>
-    <!-- </mat-form-field> -->
+    </mat-form-field>
     <!-- <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
       <img [src]="imagePreview" [alt]="form.value.className">
     </div> -->
-    <!-- <mat-form-field> -->
+    <mat-form-field>
       <input matInput rows="4" formControlName="classDes" placeholder="Grade">
       <mat-error *ngIf="form.get('classDes').invalid"> Please enter your grade for the class. </mat-error>
     </mat-form-field>
