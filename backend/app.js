@@ -18,7 +18,6 @@ mongoose.connect("mongodb+srv://brianguo:jBw739r2@cluster0.p36v5.mongodb.net/myF
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("backend/images"))); //allows for image requests
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Headers, Authorization"
@@ -86,7 +85,7 @@ app.use("/", express.static(path.join(__dirname, "../dist/gpaApp")));
 //     res.status(200).json({message: "Post deleted brah"});
 //   });
 // });
-
+app.use("/images", express.static(path.join("backend/images"))); //allows for image requests
 app.use('/html-images/', express.static('public'))
 app.use("/api/classes", classesRoutes);
 app.use("/api/user", userRoutes);
