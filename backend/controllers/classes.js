@@ -6,7 +6,7 @@ exports.createClass = (req, res, next) => {
     className: req.body.className,
     classWeight: req.body.classWeight,
     classDes: req.body.classDes,
-    // imagePath: url + "/images/" + req.file.filename,
+    imagePath: url + "/images/" + req.file.filename,
     creator: req.userData.userId //userid can be decoded from the token
   });
   // save() saves into mongodb
@@ -18,8 +18,8 @@ exports.createClass = (req, res, next) => {
         _id: createdClass._id,
         className: createdClass.className,
         classWeight: createdClass.classWeight,
-        classDes: createdClass.classDes
-        // ,imagePath: createdClass.imagePath
+        classDes: createdClass.classDes,
+        imagePath: createdClass.imagePath
       }
     });
   }).catch(error => {
