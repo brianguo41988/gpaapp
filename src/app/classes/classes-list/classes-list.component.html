@@ -70,6 +70,7 @@ p, a, button {
         <!-- <h5>Classes</h5> -->
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <mat-accordion multi="true" *ngIf="classes.length > 0 && !isLoading">
+          <h1>My Classes</h1>
           <mat-expansion-panel *ngFor="let class of classes">
             <mat-expansion-panel-header class="mat-expansion-panel-header-title">
               <p>{{ class.className }}</p>
