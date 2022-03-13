@@ -12,5 +12,4 @@ router.post("/login", UserController.userLogin);
 
 router.get("/signup", ProfileController.getClass);
 
-router.get("/:id", ClassController.getClass);
 module.exports = router;

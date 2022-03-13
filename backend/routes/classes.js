@@ -13,7 +13,7 @@ router.put("/:id", checkAuth, extractFile, ClassController.updateClass);
 
 router.get("", ClassController.getClasses);
 
-// router.get("/:id", ClassController.getClass);
+router.get("/:id", ClassController.getClass);
 
 router.delete("/:id", checkAuth, ClassController.deleteClass);
 
