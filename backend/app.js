@@ -86,7 +86,10 @@ app.use("/", express.static(path.join(__dirname, "../dist/gpaApp")));
 //   });
 // });
 app.use("/images", express.static(path.join("backend/images"))); //allows for image requests
+
+// pretty sure i added this
 app.use('/html-images/', express.static('public'));
+
 app.use("/api/classes", classesRoutes);
 app.use("/api/user", userRoutes);
 app.use("/profile", userRoutes);
