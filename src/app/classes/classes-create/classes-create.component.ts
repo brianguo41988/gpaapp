@@ -74,8 +74,8 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
     'classWeight': new FormControl(null, {
       validators: [Validators.required]}),
     'classDes': new FormControl(null, {
-          validators: [Validators.required]}),
-    'image': new FormControl()
+          validators: [Validators.required]})
+    // ,'image': new FormControl()
    });
    //null, {validators: [Validators.required], asyncValidators: [mimeType]}
    this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -85,12 +85,14 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
       this.isLoading = true; //spinner
       this.classesService.getClass(this.classId).subscribe(classData => {
         this.isLoading = false;
-        this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, imagePath: classData.imagePath, creator: classData.creator};
+        // this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, imagePath: classData.imagePath, creator: classData.creator};
+        this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, creator: classData.creator};
         this.form.setValue({
           className: this.theclass.className,
           classWeight: this.theclass.classWeight,
-          classDes: this.theclass.classDes,
-          image: this.theclass.imagePath}); // we didnt add creator?
+          classDes: this.theclass.classDes
+          // ,image: this.theclass.imagePath
+          }); // we didnt add creator?
       });
      }else{
        this.mode = 'create';
