@@ -1,12 +1,12 @@
 const Class = require('../models/class');
 
 exports.createClass = (req, res, next) => {
-  // const url = req.protocol + '://' + req.get("host");
+  const url = req.protocol + '://' + req.get("host");
   const addedClass = new Class({
     className: req.body.className,
     classWeight: req.body.classWeight,
     classDes: req.body.classDes,
-    // imagePath: url + "/images/" + req.file.filename,
+    imagePath: url + "/images/" + req.file.filename,
     creator: req.userData.userId //userid can be decoded from the token
   });
   // save() saves into mongodb
@@ -18,8 +18,8 @@ exports.createClass = (req, res, next) => {
         _id: createdClass._id,
         className: createdClass.className,
         classWeight: createdClass.classWeight,
-        classDes: createdClass.classDes
-        // ,imagePath: createdClass.imagePath
+        classDes: createdClass.classDes,
+        imagePath: createdClass.imagePath
       }
     });
   }).catch(error => {
@@ -31,17 +31,17 @@ exports.createClass = (req, res, next) => {
 };
 
 exports.updateClass = (req, res, next) => {
-  // let imagePath = req.body.imagePath;
-  // if (req.file){ //if we get a image file
-  //   const url = req.protocol + '://' + req.get("host");
-  //   imagePath = url + "/images/" + req.file.filename;
-  // }
+  let imagePath = req.body.imagePath;
+  if (req.file){ //if we get a image file
+    const url = req.protocol + '://' + req.get("host");
+    imagePath = url + "/images/" + req.file.filename;
+  }
   const updatedClass = new Class({
     _id: req.body._id,
     className: req.body.className,
     classWeight: req.body.classWeight,
     classDes: req.body.classDes,
-    // imagePath: imagePath,
+    imagePath: imagePath,
     creator: req.userData.userId
   });
   Class.updateOne({_id: req.params.id, creator: req.userData.userId }, updatedClass).then(result => {
