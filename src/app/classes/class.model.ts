@@ -3,6 +3,6 @@ export interface Class {
   className: string;
   classWeight: string;
   classDes: string;
-  // imagePath: string;
+  imagePath: string;
   creator: string;
 }
