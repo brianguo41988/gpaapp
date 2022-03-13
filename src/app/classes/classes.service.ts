@@ -84,7 +84,7 @@ export class ClassesService {
             className: c.className,
             classWeight: c.classWeight,
             classDes: c.classDes,
-            imagePath: c.imagePath,
+            // imagePath: c.imagePath,
             creator: c.creator
           };
         }), maxPosts: classData.maxPosts};
@@ -148,13 +148,13 @@ export class ClassesService {
     return this.http.get<{_id: string, className: string, classWeight: string, classDes: string, imagePath:string, creator: string}>("http://localhost:3000/api/classes/" + id);
   }
 
-  addPost(name: string, weight: string, des: string, image: File){
-  // addPost(name: string, weight: string, des: string){
+  // addPost(name: string, weight: string, des: string, image: File){
+  addPost(name: string, weight: string, des: string){
     const cData = new FormData();
     cData.append("className", name);
     cData.append("classWeight", weight);
     cData.append("classDes", des);
-    cData.append("image", image, name);
+    // cData.append("image", image, name);
     this.http.post<{message: string, addedClass: Class}>(BACKEND_URL + 'api/classes', cData) // "make sure added class is the same name in models.class.js"
     .subscribe((responseData) => {
 
@@ -180,8 +180,8 @@ export class ClassesService {
     // });
   }
 
-  updatePost(id: string, className: string, classWeight: string, classDes: string, image: File | string){
-    // updatePost(id: string, className: string, classWeight: string, classDes: string){
+  // updatePost(id: string, className: string, classWeight: string, classDes: string, image: File | string){
+    updatePost(id: string, className: string, classWeight: string, classDes: string){
     let clData: Class | FormData;
       clData = new FormData();
       clData.append("_id", id);
@@ -200,23 +200,23 @@ export class ClassesService {
 
       // clData.append("image", image, className);
 
-    if (typeof(image) === 'object'){
-      clData = new FormData();
-      clData.append("_id", id);
-      clData.append("className", className);
-      clData.append("classWeight", classWeight);
-      clData.append("classDes", classDes);
-      // clData.append("image", image, className);
-    } else {
-      clData = {
-        _id: id,
-        className: className,
-        classWeight: classWeight,
-        classDes: classDes,
-        imagePath: image,
-        creator: null // creator id is handled on the server side in routes/classes in updatedClasses
-      }
-    }
+    // if (typeof(image) === 'object'){
+    //   clData = new FormData();
+    //   clData.append("_id", id);
+    //   clData.append("className", className);
+    //   clData.append("classWeight", classWeight);
+    //   clData.append("classDes", classDes);
+    //   // clData.append("image", image, className);
+    // } else {
+    //   clData = {
+    //     _id: id,
+    //     className: className,
+    //     classWeight: classWeight,
+    //     classDes: classDes,
+    //     // imagePath: image,
+    //     creator: null // creator id is handled on the server side in routes/classes in updatedClasses
+    //   }
+    // }
     this.http.put(BACKEND_URL + "api/classes/" + id, clData)
     .subscribe(response => {
       // const updatedClasses = [...this.classes];

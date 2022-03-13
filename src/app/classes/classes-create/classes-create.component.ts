@@ -39,26 +39,26 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     if (this.mode === 'create'){
       this.classesService.getClassesForGPA(this.authService.getUserId());
-      // this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes);
-      this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
+      this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes);
+      // this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
     }else{
-      this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
-      // this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes);
+      // this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
+      this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes);
     }
     this.form.reset();
 
   }
 
-  onImagePicked(event: Event){
-    const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({image: file});
-    this.form.get('image').updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-  }
+  // onImagePicked(event: Event){
+  //   const file = (event.target as HTMLInputElement).files[0];
+  //   this.form.patchValue({image: file});
+  //   this.form.get('image').updateValueAndValidity();
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     this.imagePreview = reader.result as string;
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
 
   ngOnInit(): void {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
@@ -72,9 +72,9 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
     'classWeight': new FormControl(null, {
       validators: [Validators.required]}),
     'classDes': new FormControl(null, {
-          validators: [Validators.required]}),
-    'image': new FormControl(null, {
-          validators: [Validators.required], asyncValidators:[mimeType]})
+          validators: [Validators.required]})
+    // ,'image': new FormControl(null, {
+          // validators: [Validators.required], asyncValidators:[mimeType]})
    });
    //null, {validators: [Validators.required], asyncValidators: [mimeType]}
    this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -84,8 +84,8 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
       this.isLoading = true; //spinner
       this.classesService.getClass(this.classId).subscribe(classData => {
         this.isLoading = false;
-        this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, imagePath: classData.imagePath, creator: classData.creator};
-        // this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, creator: classData.creator};
+        // this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, imagePath: classData.imagePath, creator: classData.creator};
+        this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, creator: classData.creator};
         this.form.setValue({
           className: this.theclass.className,
           classWeight: this.theclass.classWeight,
