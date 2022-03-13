@@ -49,16 +49,19 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
 
   }
 
-  // onImagePicked(event: Event){
-  //   const file = (event.target as HTMLInputElement).files[0];
-  //   this.form.patchValue({image: file});
-  //   this.form.get('image').updateValueAndValidity();
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     this.imagePreview = reader.result as string;
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
+  onImagePicked(event: Event){
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({image: file});
+    this.form.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+
+
+
+  }
 
   ngOnInit(): void {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
@@ -73,8 +76,7 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
       validators: [Validators.required]}),
     'classDes': new FormControl(null, {
           validators: [Validators.required]})
-    // ,'image': new FormControl(null, {
-          // validators: [Validators.required]})
+    // ,'image': new FormControl()
    });
    //null, {validators: [Validators.required], asyncValidators: [mimeType]}
    this.route.paramMap.subscribe((paramMap: ParamMap) => {
