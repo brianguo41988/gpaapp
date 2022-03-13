@@ -74,7 +74,7 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
     'classDes': new FormControl(null, {
           validators: [Validators.required]})
     // ,'image': new FormControl(null, {
-          // validators: [Validators.required]})
+          // validators: [Validators.required], asyncValidators:[mimeType]})
    });
    //null, {validators: [Validators.required], asyncValidators: [mimeType]}
    this.route.paramMap.subscribe((paramMap: ParamMap) => {
