@@ -74,9 +74,9 @@ p, a, button {
             <mat-expansion-panel-header class="mat-expansion-panel-header-title">
               <p>{{ class.className }}</p>
             </mat-expansion-panel-header>
-            <div class="class-image container">
+            <!-- <div class="class-image container">
               <img [src]="class.imagePath" [alt]="class.className">
-            </div>
+            </div> -->
             <p>Weight: {{ class.classWeight}}</p>
             <p>Grade: {{ class.classDes }}</p>
             <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
