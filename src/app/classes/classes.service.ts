@@ -84,7 +84,7 @@ export class ClassesService {
             className: c.className,
             classWeight: c.classWeight,
             classDes: c.classDes,
-            // imagePath: c.imagePath,
+            imagePath: c.imagePath,
             creator: c.creator
           };
         }), maxPosts: classData.maxPosts};
