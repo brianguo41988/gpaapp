@@ -20,7 +20,7 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
   theclass: Class;
   isLoading = false;
   form: FormGroup;
-  private mode = 'edit';
+  private mode = 'create';
   private classId: string;
   imagePreview: string; //convert image to url
   private authStatusSub: Subscription;

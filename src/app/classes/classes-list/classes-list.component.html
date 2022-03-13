@@ -80,7 +80,7 @@ p, a, button {
             <p>Weight: {{ class.classWeight}}</p>
             <p>Grade: {{ class.classDes }}</p>
             <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
-              <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
+              <!-- <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a> -->
               <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
             </mat-action-row>
           </mat-expansion-panel>
