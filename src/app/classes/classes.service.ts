@@ -148,12 +148,13 @@ export class ClassesService {
     return this.http.get<{_id: string, className: string, classWeight: string, classDes: string, imagePath:string, creator: string}>("http://localhost:3000/api/classes/" + id);
   }
 
-  addPost(name: string, weight: string, des: string, image: File){
+  // addPost(name: string, weight: string, des: string, image: File){
+    addPost(name: string, weight: string, des: string){
     const cData = new FormData();
     cData.append("className", name);
     cData.append("classWeight", weight);
     cData.append("classDes", des);
-    cData.append("image", image, name);
+    // cData.append("image", image, name);
     this.http.post<{message: string, addedClass: Class}>(BACKEND_URL + 'api/classes', cData) // "make sure added class is the same name in models.class.js"
     .subscribe((responseData) => {
       // const addedClass: Class = {_id: responseData.addedClass._id, className: name, classWeight: weight, classDes: des, imagePath: responseData.addedClass.imagePath};
