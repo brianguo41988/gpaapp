@@ -39,8 +39,7 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     if (this.mode === 'create'){
       this.classesService.getClassesForGPA(this.authService.getUserId());
-      this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes);
-      // this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
+      this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
     }else{
       this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
     }
