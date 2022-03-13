@@ -183,6 +183,22 @@ export class ClassesService {
   updatePost(id: string, className: string, classWeight: string, classDes: string, image: File | string){
     // updatePost(id: string, className: string, classWeight: string, classDes: string){
     let clData: Class | FormData;
+      clData = new FormData();
+      clData.append("_id", id);
+      clData.append("className", className);
+      clData.append("classWeight", classWeight);
+      clData.append("classDes", classDes);
+
+      // clData = {
+      // _id: id,
+      // className: className,
+      // classWeight: classWeight,
+      // classDes: classDes,
+      //   // imagePath: image,
+      // creator: null // creator id is handled on the server side in routes/classes in updatedClasses
+      // }
+
+      // clData.append("image", image, className);
 
     if (typeof(image) === 'object'){
       clData = new FormData();
