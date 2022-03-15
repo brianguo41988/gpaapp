@@ -24,12 +24,31 @@ hr {
       <mat-error *ngIf="form.get('className').invalid"> Please enter a class name. </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" formControlName="classWeight" placeholder="Weight">
-      <mat-error *ngIf="form.get('classWeight').invalid"> Please enter the class weight. </mat-error>
+      <mat-select formControlName="classWeight" placeholder="Weight/Credit Hours">
+        <mat-option [value]='1'>1</mat-option>
+        <mat-option [value]='2'>2</mat-option>
+        <mat-option [value]='3'>3</mat-option>
+        <mat-option [value]='4'>4</mat-option>
+      </mat-select>
+      <!-- <input matInput type="text" formControlName="classWeight" placeholder="Weight">
+      <mat-error *ngIf="form.get('classWeight').invalid"> Please enter the class weight. </mat-error> -->
     </mat-form-field>
     <mat-form-field>
-      <input matInput rows="4" formControlName="classDes" placeholder="Grade">
-      <mat-error *ngIf="form.get('classDes').invalid"> Please enter your grade for the class. </mat-error>
+      <mat-select formControlName="classDes" placeholder="Grade">
+        <mat-option [value]='"A"'>A</mat-option>
+        <mat-option [value]='"A-"'>A-</mat-option>
+        <mat-option [value]='"B+"'>B+</mat-option>
+        <mat-option [value]='"B"'>B</mat-option>
+        <mat-option [value]='"B-"'>B-</mat-option>
+        <mat-option [value]='"C+"'>C+</mat-option>
+        <mat-option [value]='"C"'>C</mat-option>
+        <mat-option [value]='"C-"'>C-</mat-option>
+        <mat-option [value]='"D+"'>D+</mat-option>
+        <mat-option [value]='"D"'>D</mat-option>
+        <mat-option [value]='"F"'>F</mat-option>
+      </mat-select>
+      <!-- <input matInput rows="4" formControlName="classDes" placeholder="Grade">
+      <mat-error *ngIf="form.get('classDes').invalid"> Please enter your grade for the class. </mat-error> -->
     </mat-form-field>
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
       <img [src]="imagePreview" [alt]="form.value.className">

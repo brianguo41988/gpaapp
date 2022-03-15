@@ -7,6 +7,7 @@ import { viewClassName } from "@angular/compiler";
 import { Subscription } from "rxjs";
 import { mimeType } from "./mime-type.validator";
 import { AuthService } from "src/app/auth/auth.service";
+import { asLiteral } from "@angular/compiler/src/render3/view/util";
 @Component({
   selector: 'app-class-create',
   templateUrl: './classes-create.component.html',
@@ -25,6 +26,8 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
   imagePreview: string; //convert image to url
   private authStatusSub: Subscription;
   private authService: AuthService;
+  private inputGradeError = "Please enter in a valid grade.";
+  rightInput = true;
 
   constructor (classesService: ClassesService, route: ActivatedRoute, authService: AuthService){
     this.classesService = classesService;
@@ -73,6 +76,7 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
     if (this.form.invalid){
       return;
     }
+
     this.isLoading = true;
     if (this.mode === 'create'){
       this.classesService.getClassesForGPA(this.authService.getUserId());
@@ -93,9 +97,6 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
       this.imagePreview = reader.result as string;
     };
     reader.readAsDataURL(file);
-
-
-
   }
 
   ngOnDestroy(): void {

@@ -89,46 +89,8 @@ export class ClassesService {
           };
         }), maxPosts: classData.maxPosts};
       })
-    ) //transofrmed classes data is the result of ^
+    )
     .subscribe(transformedClassesData => {
-
-      // var total = 0;
-      // var GPA = 0.0;
-
-      // for (var i = 0; i < transformedClassesData.courses.length; i++){
-      //   total += Number(transformedClassesData.courses[i].classWeight);
-      // }
-      // for (var i = 0; i < transformedClassesData.courses.length; i++){
-      //   var factor = 0.0;
-      //   if (transformedClassesData.courses[i].classDes == "A" || transformedClassesData.courses[i].classDes == "a" ){
-      //     factor = 4.0;
-      //   } else if (transformedClassesData.courses[i].classDes == "A-" || transformedClassesData.courses[i].classDes == "a-" ){
-      //     factor = 3.7;
-      //   } else if (transformedClassesData.courses[i].classDes == "B+" || transformedClassesData.courses[i].classDes == "b+" ){
-      //     factor = 3.3;
-      //   } else if (transformedClassesData.courses[i].classDes == "B" || transformedClassesData.courses[i].classDes == "b" ){
-      //     factor = 3.0;
-      //   } else if (transformedClassesData.courses[i].classDes == "B-" || transformedClassesData.courses[i].classDes == "b-"){
-      //     factor = 2.7;
-      //   } else if (transformedClassesData.courses[i].classDes == "C+" || transformedClassesData.courses[i].classDes == "c+"){
-      //     factor = 2.3;
-      //   } else if (transformedClassesData.courses[i].classDes == "C" || transformedClassesData.courses[i].classDes == "c"){
-      //     factor = 2.0;
-      //   } else if (transformedClassesData.courses[i].classDes == "C-" || transformedClassesData.courses[i].classDes == "c-"){
-      //     factor = 1.7;
-      //   } else if (transformedClassesData.courses[i].classDes == "D+" || transformedClassesData.courses[i].classDes == "d+"){
-      //     factor = 1.3;
-      //   } else if (transformedClassesData.courses[i].classDes == "D" || transformedClassesData.courses[i].classDes == "d"){
-      //     factor = 1.0;
-      //   } else if (transformedClassesData.courses[i].classDes == "F" || transformedClassesData.courses[i].classDes == "f"){
-      //     factor = 0.0;
-      //   } else {
-      //     console.log("Unrecogized Grade");
-      //   }
-
-
-      //   GPA += (Number(transformedClassesData.courses[i].classWeight) / total) * factor;
-      // }
 
       this.classes = transformedClassesData.courses;
       this.classesUpdated.next({
@@ -145,7 +107,7 @@ export class ClassesService {
   }
 
   getClass(id: string){
-    return this.http.get<{_id: string, className: string, classWeight: string, classDes: string, imagePath:string, creator: string}>(BACKEND_URL + id);
+    return this.http.get<{_id: string, className: string, classWeight: string, classDes: string, imagePath:string, creator: string}>(BACKEND_URL + "api/classes/" + id);
   }
 
   addPost(name: string, weight: string, des: string, image: File){

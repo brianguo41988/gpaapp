@@ -25,6 +25,7 @@ import { ClassListComponent } from './classes/classes-list/classes-list.componen
 import { ClassCreateComponent } from './classes/classes-create/classes-create.component'
  import { ReactiveFormsModule} from '@angular/forms'
 import { ProfileComponent } from './profile/profile.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -54,7 +55,8 @@ import { ProfileComponent } from './profile/profile.component';
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
