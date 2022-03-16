@@ -4,7 +4,7 @@
 <style>
 html, body, h1, h2, h3, h4, h5, p, a, button, input,  mat-expansion-panel-header {font-family: "Raleway", sans-serif}
 
-h1 {
+h1, h3 {
   text-align: center;
 }
 
@@ -64,18 +64,17 @@ p, a, button {
 </style>
 
 <body>
-<div class="body">
+<div style="padding-top:2%;">
   <div class="prompt-div">
-    <h1>Login</h1>
+    <h3>Login</h3>
 </div>
 
-<div class="main-div">
-<mat-card>
+<mat-card style="border-radius: 25px; margin-left:auto; margin-right:auto; border: 1px solid;">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
     <mat-form-field>
-      <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel" required email>
-      <mat-error *ngIf="emailInput.invalid"> Please enter a valid email. </mat-error>
+      <input matInput name="email" ngModel type="email" placeholder="Email/Username" #emailInput="ngModel" required email>
+      <mat-error *ngIf="emailInput.invalid"> Please enter a valid email/username. </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
@@ -84,7 +83,6 @@ p, a, button {
     <button mat-raised-button color="" type="submit" *ngIf="!isLoading">Login</button>
   </form>
 </mat-card>
-</div>
 </div>
 </body>
 

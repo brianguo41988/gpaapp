@@ -5,7 +5,7 @@
 <style>
 html, body, h1, h2, h3, h4, h5, p, a, button, mat-expansion-panel-header {font-family: "Raleway", sans-serif}
 
-h1 {
+h1, h2, h3 {
   text-align: center;
 }
 
@@ -35,38 +35,34 @@ p, a, button {
   padding:0%;
 }
 
-/* body {
-  background-image: url('https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/272615006_1070862517102352_7637773252403517567_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=730e14&_nc_ohc=qFo66QKHFzUAX_Mswuy&_nc_ht=scontent-atl3-1.xx&oh=00_AT9rFm1HCmXIom02Cug7m_IlNcJwak1-YOew5zJp7MnyWQ&oe=61F3549D');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  padding: 135px 100px 150px 100px;
-} */
-
 </style>
 <body>
-<mat-action-row *ngIf="userIsAuthenticated && classes.length == 0">
-  <p>Please add some classes</p>
-</mat-action-row>
 
-  <!-- <h5 style="text-align:center">Profile</h5> -->
-   <mat-action-row *ngIf="!userIsAuthenticated && (classes.length <= 0 && !isLoading)" class="centertext">
+   <mat-action-row *ngIf="!userIsAuthenticated" class="centertext">
     <div style="border-radius: 25px; height: 370px; width: 200px;  margin: auto;
     width: 50%;
     border: 1px solid;
     padding: 10px;">
       <p>GPA Tracker is designed to help track classes with their respective GPA</p>
-      <p class="centertext">Please login to begin.</p>
+      <p class="centertext">Please login to begin</p>
       <hr>
-      <p>About Us</p>
-      <p>Motivation: UNC-Chapel Hill does not have a built in program that allows students to calculate projected GPA.</p>
+      <p>Motivation: UNC-Chapel Hill does not have a built in program that allows students to calculate projected GPA</p>
       <p>Step 1: Sign up</p>
       <p>Step 2: Login</p>
       <p>Step 3: Add Classes</p>
       <p>Step 4: Project GPA!</p>
     </div>
   </mat-action-row>
-  <!-- <img src="" style="width:100%" alt="Class"> -->
+
+  <div style="border-radius: 25px; height: 200px; width: 200px;  margin: auto;
+  width: 50%;
+  border: 1px solid;
+  padding: 10px;" *ngIf="userIsAuthenticated && classes.length == 0">
+    <h3>My Classes</h3>
+    <hr>
+    <p>You currently have no classes</p>
+    <p>Please add classes to continue</p>
+  </div>
 
 
 <div class="w3-panel">
@@ -74,24 +70,28 @@ p, a, button {
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-third" style="border-radius: 25px; height: 370px; width: 200px;"></div>
       <div class="w3-twothird">
-        <!-- <h5>Classes</h5> -->
         <mat-spinner *ngIf="isLoading"></mat-spinner>
-        <mat-accordion multi="true" *ngIf="classes.length > 0 && !isLoading">
-          <h1>My Classes</h1>
-          <mat-expansion-panel *ngFor="let class of classes">
-            <mat-expansion-panel-header class="mat-expansion-panel-header-title">
-              <p>{{ class.className }}</p>
-            </mat-expansion-panel-header>
-            <div class="class-image container">
-              <img [src]="class.imagePath" [alt]="class.className">
-            </div>
-            <p>Weight: {{ class.classWeight}}</p>
-            <p>Grade: {{ class.classDes }}</p>
-            <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
-              <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
-              <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
-            </mat-action-row>
-          </mat-expansion-panel>
+        <mat-accordion multi="true" *ngIf="classes.length > 0 && !isLoading && userIsAuthenticated">
+          <div style="border-radius: 25px; margin: auto;
+          border: 1px solid;
+          padding: 20px;">
+          <h3>My Classes</h3>
+          <hr>
+            <mat-expansion-panel *ngFor="let class of classes">
+              <mat-expansion-panel-header class="mat-expansion-panel-header-title">
+                <p>{{ class.className }}</p>
+              </mat-expansion-panel-header>
+              <div class="class-image container">
+                <img [src]="class.imagePath" [alt]="class.className">
+              </div>
+              <p>Weight: {{ class.classWeight}}</p>
+              <p>Grade: {{ class.classDes }}</p>
+              <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
+                <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
+                <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          </div>
         </mat-accordion>
         <!-- <mat-paginator [length]="totalClasses" [pageSize]="classesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="classes.length > 0">
 

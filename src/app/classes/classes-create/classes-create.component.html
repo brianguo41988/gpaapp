@@ -4,7 +4,7 @@
 <style>
 html,body,h1,h2,h3,h4,h5,p,a,button {font-family: "Raleway", sans-serif}
 
-h1 {
+h1, h3 {
   text-align: center;
 }
 
@@ -15,9 +15,9 @@ hr {
 }
 </style>
 <body style="width:50%; margin-left:auto; margin-right:auto;">
-<h1 *ngIf="mode == 'create'" >Add Class</h1>
-<h1 *ngIf="mode == 'edit'" >Edit Class</h1>
-<mat-card style="border-radius: 25px; width:50%; margin-left:auto; margin-right:auto;">
+<h3 *ngIf="mode == 'create'" >Add Class</h3>
+<h3 *ngIf="mode == 'edit'" >Edit Class</h3>
+<mat-card style="border-radius: 25px; width:50%; margin-left:auto; margin-right:auto; border: 1px solid;">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
     <mat-form-field>
@@ -54,12 +54,9 @@ hr {
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
       <img [src]="imagePreview" [alt]="form.value.className">
     </div>
-    <div>
-      <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
-      <input type="file" #filePicker (change)="onImagePicked($event)">
-    </div>
-    <hr>
-      <button mat-raised-button color="" type="submit">Save Class</button>
+    <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+    <input type="file" #filePicker (change)="onImagePicked($event)">
+    <button mat-raised-button color="" type="submit">Save Class</button>
 
 
   </form>

@@ -31,6 +31,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(){
+
     this.isLoading = true;
     this.userId = this.authService.getUserId();
 
