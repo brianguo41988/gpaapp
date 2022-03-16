@@ -15,8 +15,9 @@ hr {
 }
 </style>
 <body style="width:50%; margin-left:auto; margin-right:auto;">
-<h1>Add Class</h1>
-<mat-card style="border-radius: 25px;">
+<h1 *ngIf="mode == 'create'" >Add Class</h1>
+<h1 *ngIf="mode == 'edit'" >Edit Class</h1>
+<mat-card style="border-radius: 25px; width:50%; margin-left:auto; margin-right:auto;">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
     <mat-form-field>
