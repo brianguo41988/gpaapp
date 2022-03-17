@@ -35,7 +35,6 @@ p, a, button {
 }
 
 .mat-card {
-  /* all:initial; */
   position:initial;
   transition: initial;
   width: 300px;
@@ -52,15 +51,6 @@ p, a, button {
   justify-content: center;
   align-items: center;
 }
-
-  /* body {
-  background-image: url('https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/272615006_1070862517102352_7637773252403517567_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=730e14&_nc_ohc=qFo66QKHFzUAX_Mswuy&_nc_ht=scontent-atl3-1.xx&oh=00_AT9rFm1HCmXIom02Cug7m_IlNcJwak1-YOew5zJp7MnyWQ&oe=61F3549D');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  padding: 100px 100px 150px 100px;
-} */
-
 </style>
 
 <body>
@@ -73,7 +63,7 @@ p, a, button {
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
     <mat-form-field>
-      <input matInput name="email" ngModel type="email" placeholder="Email/Username" #emailInput="ngModel" required email>
+      <input matInput name="email" ngModel type="" placeholder="Email/Username" #emailInput="ngModel" required email>
       <mat-error *ngIf="emailInput.invalid"> Please enter a valid email/username. </mat-error>
     </mat-form-field>
     <mat-form-field>

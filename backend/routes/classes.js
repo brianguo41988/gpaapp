@@ -6,7 +6,6 @@ const extractFile = require("../middleware/file");
 
 const ClassController = require("../controllers/classes");
 
-// router.post("", checkAuth, multer({storage: storage}).single("image"), ClassController.createClass);
 router.post("", checkAuth, extractFile, ClassController.createClass);
 
 router.put("/:id", checkAuth, extractFile, ClassController.updateClass);

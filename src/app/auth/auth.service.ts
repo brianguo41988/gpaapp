@@ -52,8 +52,6 @@ export class AuthService {
 
   getUser(userId: string) {
     const queryParams = `?uid=${userId}`;
-    // console.log("hi");
-    //classesData is what is recieved from the request
     this.http.get<{message: string, classes: any}>(BACKEND_URL + 'api/user/signup' + queryParams).subscribe(response => {
       this.lname = response.classes[0].lname;
       this.fname = response.classes[0].fname;
@@ -62,7 +60,6 @@ export class AuthService {
         email: this.email,
         fname: this.fname,
         lname: this.lname });
-      // console.log(response);
     });
 
     console.log(this.fname);
@@ -128,7 +125,7 @@ export class AuthService {
     this.authStatusListener.next(false);
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.userId = null; // SETTING USER ID TO NULL MAYBE HUH?
+    this.userId = null;
     this.router.navigate(['/']);
   }
 
@@ -158,7 +155,6 @@ export class AuthService {
     if (!token || !expirationDate){
       return;
     }
-
     return {
       token: token,
       expirationDate: new Date(expirationDate),

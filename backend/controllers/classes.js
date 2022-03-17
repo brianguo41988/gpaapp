@@ -61,19 +61,9 @@ exports.getClasses = (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   const uid = req.query.uid;
-  // console.log("hi");
   let fetchedClasses = [];
 
   const classQuery = Class.find({creator:uid});
-  // const classQuery = Class.find();
-  // if (pageSize && currentPage){
-  //   classQuery
-  //   .skip(pageSize * (currentPage - 1))
-  //   .limit(pageSize);
-  // }
-  // console.log(classQuery);
-  // console.log(classQuery);
-     //return all monogodb classes entries
     classQuery.then(documents => {
       console.log("entered then");
       fetchedClasses = documents;
@@ -108,7 +98,6 @@ exports.getClass = (req, res, next) => {
 
 exports.deleteClass = (req, res, next) => {
   Class.deleteOne({_id: req.params.id, creator: req.userData.userId}).then(result => {
-    // console.log("result is: ", result);
     if (result.deletedCount > 0){
       res.status(200).json({message: "Post deleted brah"});
     } else {

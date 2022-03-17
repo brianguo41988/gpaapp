@@ -26,7 +26,6 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
   imagePreview: string; //convert image to url
   private authStatusSub: Subscription;
   private authService: AuthService;
-  private inputGradeError = "Please enter in a valid grade.";
   rightInput = true;
 
   constructor (classesService: ClassesService, route: ActivatedRoute, authService: AuthService){
@@ -50,12 +49,11 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
           validators: [Validators.required]}),
     'image': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]})
    });
-   //null, {validators: [Validators.required], asyncValidators: [mimeType]}
    this.route.paramMap.subscribe((paramMap: ParamMap) => {
      if (paramMap.has('classId')){
       this.mode = 'edit';
       this.classId = paramMap.get('classId');
-      this.isLoading = true; //spinner
+      this.isLoading = true;
       this.classesService.getClass(this.classId).subscribe(classData => {
         this.isLoading = false;
         this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, imagePath: classData.imagePath, creator: classData.creator};
@@ -63,7 +61,7 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
           className: this.theclass.className,
           classWeight: this.theclass.classWeight,
           classDes: this.theclass.classDes,
-          image: this.theclass.imagePath}); // we didnt add creator?
+          image: this.theclass.imagePath});
       });
      }else{
        this.mode = 'create';

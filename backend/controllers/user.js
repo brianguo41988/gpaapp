@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-// "User" is in reference to mongodb?
+// "User" is in reference to mongodb
 
 exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
