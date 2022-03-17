@@ -57,14 +57,6 @@ p, a, button {
   height:300px;
 }
 
-/* body {
-  background-image: url('https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/272615006_1070862517102352_7637773252403517567_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=730e14&_nc_ohc=qFo66QKHFzUAX_Mswuy&_nc_ht=scontent-atl3-1.xx&oh=00_AT9rFm1HCmXIom02Cug7m_IlNcJwak1-YOew5zJp7MnyWQ&oe=61F3549D');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  padding: 100px 100px 150px 100px;
-} */
-
 </style>
 
 <body>
@@ -85,17 +77,13 @@ p, a, button {
         <mat-error *ngIf="form.get('lname').invalid"> Please enter your last name. </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="email" formControlName="email" placeholder="Email/Username">
-        <mat-error *ngIf="form.get('email').invalid"> Please enter your email/username. </mat-error>
+        <input matInput name="email" type="email" formControlName="email" placeholder="Email">
+        <mat-error *ngIf="form.get('email').invalid"> Please enter your email. </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput name="password" formControlName="password" placeholder="Password" type="password">
         <mat-error *ngIf="form.get('password').invalid"> Please enter a valid password. </mat-error>
       </mat-form-field>
-      <!-- <div>
-        <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
-        <input type="file" #filePicker (change)="onImagePicked($event)">
-      </div> -->
       <button mat-raised-button color="" type="submit" *ngIf="!isLoading">Signup</button>
     </form>
   </mat-card>

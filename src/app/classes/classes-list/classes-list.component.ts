@@ -42,17 +42,10 @@ export class ClassListComponent implements OnInit, OnDestroy {
     }
 
     this.classesService.getClasses(this.classesPerPage, this.currentPage, this.userId);
-    console.log(this.userId +  "USER ID");
     this.classesSub = this.classesService.getPostUpdateListener()
       .subscribe((classData: {courses: Class[], courseCount: number}) => {
         this.isLoading = false;
         this.totalClasses = classData.courseCount;
-        // for loop that check to see if userId is correct to show correct classes
-        // for (var i = 0; i < this.totalClasses; i++){
-          // if (classData.courses[i].creator == this.userId){
-          //   this.classes.push(classData.courses[i]);
-          // }
-        // }
 
         this.classes = classData.courses;
 
@@ -65,8 +58,6 @@ export class ClassListComponent implements OnInit, OnDestroy {
           this.userId = this.authService.getUserId();
         }
       );
-        // this.authService.getFname();
-        // console.log(this.classes.length);
   }
 
   ngOnDestroy(): void {

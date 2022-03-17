@@ -97,9 +97,6 @@ export class ClassesService {
         courses: [...this.classes],
         courseCount: this.GPA});
     });
-
-    // console.log(this.classes);
-    // return this.classes;
   }
 
   getPostUpdateListener(){
@@ -118,22 +115,12 @@ export class ClassesService {
     cData.append("image", image, name);
     this.http.post<{message: string, addedClass: Class}>(BACKEND_URL + 'api/classes', cData) // "make sure added class is the same name in models.class.js"
     .subscribe((responseData) => {
-      // const addedClass: Class = {_id: responseData.addedClass._id, className: name, classWeight: weight, classDes: des, imagePath: responseData.addedClass.imagePath};
-      // // const id = responseData.classId;
-      // // addedClass._id = id;
-      // this.classes.push(addedClass);
-      // this.classesUpdated.next(this.classes);
       this.router.navigate(["/"]);
     });
   }
 
   deletePost(classId: string) {
     return this.http.delete(BACKEND_URL + "api/classes/" + classId);
-    // .subscribe(() => {
-    //   const updatedClasses = this.classes.filter(classa => classa._id !== classId);
-    //     this.classes = updatedClasses;
-    //     this.classesUpdated.next(this.classes);
-    // });
   }
 
   updatePost(id: string, className: string, classWeight: string, classDes: string, image: File | string){
@@ -157,12 +144,6 @@ export class ClassesService {
     }
     this.http.put(BACKEND_URL + "api/classes/" + id, clData)
     .subscribe(response => {
-      // const updatedClasses = [...this.classes];
-      // const oldClassIndex = updatedClasses.findIndex(c => c._id === id);
-      // const updatedClass: Class = {_id: id, className: className, classWeight: classWeight, classDes: classDes, imagePath: ""};
-      // updatedClasses[oldClassIndex] = updatedClass;
-      // this.classes = updatedClasses;
-      // this.classesUpdated.next([...this.classes]);
       this.router.navigate(["/"]);
     });
   }

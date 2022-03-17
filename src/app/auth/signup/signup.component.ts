@@ -34,22 +34,12 @@ export class SignupComponent implements OnInit, OnDestroy {
             validators: [Validators.required]}),
       'password': new FormControl(null, {
             validators: [Validators.required]})
-      //       ,
-      // 'image': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]})
      });
   }
 
   ngOnDestroy(){
     this.authStatusSub.unsubscribe();
   }
-
-  // onSignup(form: NgForm){
-  //   if (form.invalid){
-  //     return;
-  //   }
-  //   this.isLoading = true;
-  //   this.authService.createUser(form.value.email, form.value.password, form.value.fname, form.value.lname);
-  // }
 
   onSignup(){
 
@@ -60,15 +50,4 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.authService.createUser(this.form.value.email, this.form.value.password, this.form.value.fname, this.form.value.lname);
   }
-
-  // onImagePicked(event: Event){
-  //   const file = (event.target as HTMLInputElement).files[0];
-  //   this.form.patchValue({image: file});
-  //   this.form.get('image').updateValueAndValidity();
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     this.imagePreview = reader.result as string;
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
 }
