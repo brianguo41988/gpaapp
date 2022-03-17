@@ -6,6 +6,7 @@ exports.createClass = (req, res, next) => {
     className: req.body.className,
     classWeight: req.body.classWeight,
     classDes: req.body.classDes,
+    notes: req.body.notes,
     imagePath: url + "/images/" + req.file.filename,
     creator: req.userData.userId //userid can be decoded from the token
   });
@@ -19,6 +20,7 @@ exports.createClass = (req, res, next) => {
         className: createdClass.className,
         classWeight: createdClass.classWeight,
         classDes: createdClass.classDes,
+        notes: req.body.notes,
         imagePath: createdClass.imagePath
       }
     });
@@ -40,6 +42,7 @@ exports.updateClass = (req, res, next) => {
     className: req.body.className,
     classWeight: req.body.classWeight,
     classDes: req.body.classDes,
+    notes: req.body.notes,
     imagePath: imagePath,
     creator: req.userData.userId
   });
