@@ -47,6 +47,8 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
       validators: [Validators.required]}),
     'classDes': new FormControl(null, {
           validators: [Validators.required]}),
+    'notes': new FormControl(null, {
+          validators: [Validators.required]}),
     'image': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]})
    });
    this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -56,11 +58,12 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       this.classesService.getClass(this.classId).subscribe(classData => {
         this.isLoading = false;
-        this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, imagePath: classData.imagePath, creator: classData.creator};
+        this.theclass = {_id: classData._id, className: classData.className, classWeight: classData.classWeight, classDes: classData.classDes, notes: classData.notes, imagePath: classData.imagePath, creator: classData.creator};
         this.form.setValue({
           className: this.theclass.className,
           classWeight: this.theclass.classWeight,
           classDes: this.theclass.classDes,
+          notes: this.theclass.notes,
           image: this.theclass.imagePath});
       });
      }else{
@@ -78,9 +81,9 @@ export class ClassCreateComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     if (this.mode === 'create'){
       this.classesService.getClassesForGPA(this.authService.getUserId());
-      this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
+      this.classesService.addPost(this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.notes, this.form.value.image);
     }else{
-      this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.image);
+      this.classesService.updatePost(this.classId, this.form.value.className, this.form.value.classWeight, this.form.value.classDes, this.form.value.notes, this.form.value.image);
     }
     this.form.reset();
 

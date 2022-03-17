@@ -47,6 +47,7 @@ hr {
         <mat-option [value]='"F"'>F</mat-option>
       </mat-select>
     </mat-form-field>
+      <textarea formControlName="notes" placeholder="Notes"></textarea>
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
       <img [src]="imagePreview" [alt]="form.value.className">
     </div>
