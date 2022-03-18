@@ -4,7 +4,7 @@
 <style>
 html,body,h1,h2,h3,h4,h5,p,a,button {font-family: "Raleway", sans-serif}
 
-h1, h3 {
+h1, h3{
   text-align: center;
 }
 
@@ -58,7 +58,7 @@ hr {
       </mat-select>
     </mat-form-field>
     <div>
-      <textarea formControlName="notes" placeholder="Notes"></textarea>
+      <textarea formControlName="notes" rows="4" placeholder="Additional Notes"></textarea>
     </div>
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
       <img [src]="imagePreview" [alt]="form.value.className">
