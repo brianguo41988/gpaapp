@@ -78,12 +78,12 @@ p, a, button {
               <mat-expansion-panel-header class="mat-expansion-panel-header-title">
                 <p>{{ class.className }}</p>
               </mat-expansion-panel-header>
-              <div class="class-image container">
+              <div class="class-image container" *ngIf="class?.imagePath">
                 <img [src]="class.imagePath" [alt]="class.className">
               </div>
               <p>Weight: {{ class.classWeight}}</p>
               <p>Grade: {{ class.classDes }}</p>
-              <p>Notes: {{ class.notes }}</p>
+              <p *ngIf="class.notes != 'null'" >{{ class.notes }}</p>
               <mat-action-row *ngIf="userIsAuthenticated && userId === class.creator">
                 <a mat-button color="accent" [routerLink]="['/edit', class._id]">EDIT</a>
                 <button mat-button color="warn" (click)="onDelete(class._id)">DELETE</button>
