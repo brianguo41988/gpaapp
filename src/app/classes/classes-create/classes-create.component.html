@@ -23,11 +23,12 @@ hr {
   background: grey;
   height: 0.25px;
 }
+
 </style>
-<body style="width:50%; margin-left:auto; margin-right:auto;">
+<body style="width:60%; margin-left:auto; margin-right:auto;">
 <h3 *ngIf="mode == 'create'" >Add Class</h3>
 <h3 *ngIf="mode == 'edit'" >Edit Class</h3>
-<mat-card style="border-radius: 25px; width:50%; margin-left:auto; margin-right:auto; border: 1px solid;">
+<mat-card class="createClass" style="border-radius: 25px; width:75%; margin-left:auto; margin-right:auto; border: 1px solid;">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
     <mat-form-field>
@@ -65,6 +66,7 @@ hr {
     </div>
     <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
     <input type="file" #filePicker (change)="onImagePicked($event)">
+    <hr>
     <button mat-raised-button color="" type="submit">Save Class</button>
 
 

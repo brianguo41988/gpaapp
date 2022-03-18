@@ -38,9 +38,8 @@ p, a, button {
 <body>
 
    <mat-action-row *ngIf="!userIsAuthenticated" class="centertext">
-    <div style="border-radius: 25px; height: 370px; width: 200px;  margin: auto;
-    width: 50%; border: 1px solid; padding: 10px;">
-      <p>GPA Tracker is designed to help track classes with their respective GPA</p>
+    <div style="border-radius: 25px; height: 400px; width: 200px;  margin: auto; width: 50%; border: 1px solid; padding: 10px;">
+      <p>GPA Tracker is designed to help students academic progress</p>
       <p class="centertext">Please login to begin</p>
       <hr>
       <p>Motivation: UNC-Chapel Hill does not have a built in program that allows students to calculate projected GPA</p>
@@ -51,9 +50,7 @@ p, a, button {
     </div>
   </mat-action-row>
 
-  <div style="border-radius: 25px; height: 200px;
-  width: 200px; margin: auto; width: 50%;
-  border: 1px solid; padding: 10px;"
+  <div style="border-radius: 25px; height: 200px; width: 200px; margin: auto; width: 50%; border: 1px solid; padding: 10px;"
   *ngIf="userIsAuthenticated && classes.length == 0">
     <h3>My Classes</h3>
     <hr>
@@ -61,17 +58,10 @@ p, a, button {
     <p>Please add classes to continue</p>
   </div>
 
-
-<div class="w3-panel">
   <div class>
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-third" style="border-radius: 25px; height: 370px; width: 200px;"></div>
-      <div class="w3-twothird">
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <mat-accordion multi="true" *ngIf="classes.length > 0 && !isLoading && userIsAuthenticated">
-          <div style="border-radius: 25px; margin: auto;
-          border: 1px solid;
-          padding: 20px;">
+          <div style="border-radius: 25px; margin: auto; border: 1px solid; width: 50%; padding: 20px;">
           <h3>My Classes</h3>
           <hr>
             <mat-expansion-panel *ngFor="let class of classes">
@@ -92,9 +82,5 @@ p, a, button {
           </div>
         </mat-accordion>
       </div>
-    </div>
-  </div>
-</div>
-
 </body>
 

@@ -36,6 +36,7 @@ export class ProfileComponent {
   this.gpaSub = this.classesService.getGpaUpdatedAsObverable()
       .subscribe((gpaData: {GPA: number}) => {
         this.GPA = gpaData.GPA;
+        this.GPA = Math.round(this.GPA * 100) / 100
       });
 
   console.log(this.classesService.getGPA() + " this");
