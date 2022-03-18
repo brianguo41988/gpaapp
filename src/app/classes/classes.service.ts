@@ -25,8 +25,8 @@ export class ClassesService {
     return this.gpaUpdated.asObservable();
   }
 
-  getClasses(classesPerPage: number, currentPage: number, userId: string) {
-    const queryParams = `?pagesize=${classesPerPage}&page=${currentPage}&uid=${userId}`;
+  getClasses(userId: string) {
+    const queryParams = `?uid=${userId}`;
     //classesData is what is recieved from the request
     this.http.get<{message: string, classes: any, maxPosts: number}>(BACKEND_URL + 'api/classes' + queryParams)
     .pipe(

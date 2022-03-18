@@ -41,7 +41,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.classesService.getClasses(this.classesPerPage, this.currentPage, this.userId);
+    this.classesService.getClasses(this.userId);
     this.classesSub = this.classesService.getPostUpdateListener()
       .subscribe((classData: {courses: Class[], courseCount: number}) => {
         this.isLoading = false;
@@ -72,17 +72,10 @@ export class ClassListComponent implements OnInit, OnDestroy {
   onDelete(classId: string){
     this.isLoading = true;
     this.classesService.deletePost(classId).subscribe(() => {
-      this.classesService.getClasses(this.classesPerPage, this.currentPage, this.userId);
+      this.classesService.getClasses(this.userId);
     }, () => {
       this.isLoading = false;
     });
-  }
-
-  onChangedPage(pageData: PageEvent){
-    // this.isLoading = true;
-    this.currentPage = pageData.pageIndex + 1;
-    this.classesPerPage = pageData.pageSize;
-    this.classesService.getClasses(this.classesPerPage, this.currentPage, this.userId);
   }
 
 }
